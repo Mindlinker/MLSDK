@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 26
+        versionCode 1
+        versionName '1.0.0'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        preRelease {
+
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext {
+    retrofit2Version = "2.3.0"
+    glideVersion = "4.9.0"
+}
+
+dependencies {
+
+    api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
+    implementation 'com.google.android.material:material:1.0.0'
+
+    //retrofit2
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2Version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version"
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    // okhttp 查看请求Log使用
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
+
+    implementation('io.socket:socket.io-client:1.0.0'){
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+
+    implementation 'me.jessyan:autosize:1.2.1'
+}
