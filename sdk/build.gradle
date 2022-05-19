@@ -100,5 +100,5 @@ dependencies {
 
     embed (name:'mlsdk_1.0.0.f356e08', ext:'aar')
     embed (name:'android.logger-1.2.2', ext:'aar')
-    implementation (name:'MaxME_2.32.1.4cb75a06', ext:'aar')
+    embed (name:'MaxME_2.32.1.4cb75a06', ext:'aar')
 }
