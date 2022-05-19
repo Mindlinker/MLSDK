@@ -50,14 +50,14 @@
             android:layout_marginTop="@dimen/ml_px_104"
             app:layout_constraintTop_toBottomOf="@id/title"
             android:text="18818888881"
-            android:textCursorDrawable="@drawable/ml_edittext_cursor"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
             android:inputType="number"
             android:background="@null" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/ml_px_1"
-            android:background="@color/ml_color_D6D6D6"
+            android:background="@color/color_D6D6D6"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/ml_dimen_10"
             app:layout_constraintLeft_toRightOf="parent"
@@ -75,7 +75,7 @@
             android:layout_marginRight="@dimen/ml_px_60"
             android:paddingTop="@dimen/ml_px_20"
             android:text="1"
-            android:textCursorDrawable="@drawable/ml_edittext_cursor"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
             android:background="@null"/>
 
 
@@ -88,13 +88,13 @@
             android:layout_marginTop="@dimen/ml_px_60"
             android:layout_marginEnd="@dimen/ml_px_60"
             android:padding="@dimen/ml_px_4"
-            android:src="@drawable/ic_hide_pwd_icon_hov"
+            android:src="@drawable/shape_hide_pwd_icon_hov"
             app:layout_constraintLeft_toRightOf="@+id/edPassword" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/ml_px_1"
-            android:background="@color/ml_color_D6D6D6"
+            android:background="@color/color_D6D6D6"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="@dimen/ml_dimen_10"
             app:layout_constraintLeft_toRightOf="parent"
@@ -109,7 +109,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edPassword"
             android:layout_margin="@dimen/ml_dimen_10"
-            android:textCursorDrawable="@drawable/ml_edittext_cursor"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
             android:inputType="textPassword"
             android:visibility="gone"/>
 
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:text="01"
             android:textSize="32sp"
-            android:textColor="@color/ml_color_333333"
+            android:textColor="@color/color_333333"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="16dp" />
 
@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:text="2022年3月"
             android:textSize="12sp"
-            android:textColor="@color/ml_color_333333"
+            android:textColor="@color/color_333333"
             android:layout_marginTop="26dp"
             android:layout_marginLeft="12dp"
             android:layout_toRightOf="@id/tvDay"/>
@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:text="周三"
             android:textSize="12sp"
-            android:textColor="@color/ml_color_333333"
+            android:textColor="@color/color_333333"
             android:layout_marginLeft="12dp"
             android:layout_toRightOf="@id/tvDay"
             android:layout_below="@id/tvYear"/>
@@ -208,7 +208,7 @@
             android:layout_height="160dp"
             android:layout_below="@id/tvDay"
             android:layout_marginTop="12dp"
-            android:background="@drawable/ml_ic_create_meeting">
+            android:background="@drawable/shape_ic_create_meeting">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -216,7 +216,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginStart="40dp"
                 android:text="创建房间"
-                android:textColor="@color/ml_color_FFFFFF"
+                android:textColor="@color/color_FFFFFF"
                 android:textSize="28sp" />
 
         </RelativeLayout>
@@ -228,7 +228,7 @@
             android:layout_below="@id/createMeeting"
             android:layout_marginBottom="24dp"
             android:layout_marginTop="-12dp"
-            android:background="@drawable/ic_ml_ic_join_meeting">
+            android:background="@drawable/shape_ml_ic_join_meeting">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
                 android:layout_marginStart="40dp"
                 android:gravity="center_vertical"
                 android:text="加入房间"
-                android:textColor="@color/ml_color_FFFFFF"
+                android:textColor="@color/color_FFFFFF"
                 android:textSize="28sp" />
 
         </RelativeLayout>
@@ -326,7 +326,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:gravity="center_horizontal"
         android:clickable="true"
         android:visibility="gone">
@@ -343,7 +343,7 @@
             android:layout_height="wrap_content"
             android:text="登录失败"
             android:textSize="18sp"
-            android:textColor="@color/ml_color_333333"/>
+            android:textColor="@color/color_333333"/>
 
         <TextView
             android:layout_width="65dp"
@@ -361,6 +361,6 @@
             android:textSize="16sp"
             android:gravity="center"
             android:layout_marginTop="16dp"
-            android:textColor="@color/ml_color_FFFFFF"/>
+            android:textColor="@color/color_FFFFFF"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

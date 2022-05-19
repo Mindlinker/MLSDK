@@ -5,7 +5,7 @@
     </style>
 
     <style name="BlackTheme" parent="Theme.MLSDK">
-        <item name="android:windowBackground">@color/ml_color_000000</item>
-        <item name="android:colorBackground">@color/ml_color_000000</item>
+        <item name="android:windowBackground">@color/color_000000</item>
+        <item name="android:colorBackground">@color/color_000000</item>
     </style>
 </resources>

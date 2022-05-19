@@ -9,13 +9,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/ml_px_66"
-        android:background="@color/ml_color_FFFFFF"/>
+        android:background="@color/color_FFFFFF"/>
 
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/ml_px_88"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:layout_marginTop="@dimen/ml_px_66">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -24,14 +24,14 @@
             android:layout_height="@dimen/ml_px_48"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
-            android:src="@drawable/ml_ic_nav_back" />
+            android:src="@drawable/ic_nav_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="加入房间"
-            android:textColor="@color/ml_color_333333"
+            android:textColor="@color/color_333333"
             android:textSize="@dimen/ml_font_34" />
     </RelativeLayout>
 
@@ -42,7 +42,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="12dp"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:paddingLeft="15dp"
         android:layout_below="@id/rl">
 
@@ -64,7 +64,7 @@
             android:layout_marginEnd="@dimen/ml_px_44"
             android:lines="1"
             android:inputType="number"
-            android:textCursorDrawable="@drawable/ml_edittext_cursor"/>
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"/>
     </LinearLayout>
 
     <LinearLayout
@@ -75,7 +75,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:layout_marginTop="@dimen/ml_px_1"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:layout_below="@id/llMeeting">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -94,7 +94,7 @@
             android:background="@null"
             android:layout_marginStart="@dimen/ml_px_44"
             android:layout_marginEnd="@dimen/ml_px_44"
-            android:textCursorDrawable="@drawable/ml_edittext_cursor"
+            android:textCursorDrawable="@drawable/shape_edittext_cursor"
             android:lines="1"/>
     </LinearLayout>
 
@@ -105,7 +105,7 @@
         android:layout_height="54dp"
         android:layout_below="@id/llMeetingName"
         android:layout_marginTop="12dp"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
@@ -138,7 +138,7 @@
         android:paddingLeft="15dp"
         android:paddingRight="28dp"
         android:layout_marginTop="@dimen/ml_px_1"
-        android:background="@color/ml_color_FFFFFF"
+        android:background="@color/color_FFFFFF"
         android:layout_below="@id/llMic">
 
         <androidx.appcompat.widget.AppCompatTextView
