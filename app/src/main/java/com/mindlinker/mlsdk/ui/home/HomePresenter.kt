@@ -8,6 +8,7 @@ import com.mindlinker.mlsdk.network.auth.IAuthEngine
 import com.mindlinker.sdk.api.MLApi
 import com.mindlinker.sdk.api.callback.AuthCallback
 import com.mindlinker.sdk.api.callback.DismissOtherMeetingCallback
+import com.mindlinker.sdk.api.callback.MLCallback
 import com.mindlinker.sdk.api.callback.MeetingCallback
 import com.mindlinker.sdk.constants.MAXME_REJOIN_MEETING
 import com.mindlinker.sdk.model.call.CallCancelList
@@ -74,15 +75,16 @@ class HomePresenter : IHomePresenter {
         MLApi.authenticate(
             URL,
             token, nickName, "",
-            object : AuthCallback {
-                override fun onSuccess() {
-                    Log.i(TAG, "MaxME authenticate success.")
-                    mView?.authenticateSuccess()
+            object : MLCallback<Boolean> {
+                override fun onResult(code: Int, msg: String, data: Boolean?) {
+                    if (code == 0) {
+                        Log.i(TAG, "MaxME authenticate success.")
+                        mView?.authenticateSuccess()
+                    } else {
+                        Log.w(TAG, "MaxME authenticate failed, error : $code msg: $msg")
+                    }
                 }
 
-                override fun onError(code: Int, msg: String) {
-                    Log.w(TAG, "MaxME authenticate failed, error : $code msg: $msg")
-                }
             }
         )
     }
@@ -125,29 +127,40 @@ class HomePresenter : IHomePresenter {
     override fun createMeeting(edUserName: String, isMuteVideo: Boolean, isMuteAudio: Boolean) {
         MLApi.createMeeting(
             isMuteVideo = isMuteVideo, isMuteAudio = isMuteAudio, nickName = "", avatar = "",
-            callback = object : MeetingCallback {
-                override fun onMeetingExist(roomId: String, sessionId: String) {
-                    mView?.showTwoButtonDialog("你之前有创建的房间未结束 \n房间号：$roomId", roomId, sessionId)
-                    mView?.showLoading(false)
+            callback = object : MLCallback<MLRoomInfo> {
+                override fun onResult(code: Int, msg: String, data: MLRoomInfo?) {
+                    when(code) {
+                        0 -> {
+                            // 成功
+                            Log.d(TAG, "on meeting create success data: $data")
+                            if (data != null) {
+                                mView?.createAndJoinMeetingSuccess(data)
+                            }
+                            mView?.showLoading(false)
+                        }
+                        9997 -> {
+                            // 已经在房间中
+                            mView?.showToast("你已经在房间中了")
+                            mView?.showLoading(false)
+                        }
+                        403103014 -> {
+                            // 会议室已存在
+                            data?.let {
+                                mView?.showTwoButtonDialog("你之前有创建的房间未结束 \n房间号：${data.roomNo}", data.roomNo, data.id)
+                                mView?.showLoading(false)
+                            }
+
+                        }
+                        else -> {
+                            Log.d(TAG, "on meeting create failure $code")
+                            mView?.showToast(msg)
+                            mView?.showLoading(false)
+                        }
+                    }
                 }
 
-                override fun onSuccess(data: MLRoomInfo) {
-                    Log.d(TAG, "on meeting create success data: $data")
-                    mView?.createAndJoinMeetingSuccess(data)
-                    mView?.showLoading(false)
-                }
-
-                override fun onError(code: Int, msg: String) {
-                    Log.d(TAG, "on meeting create failure $code")
-                    mView?.showToast(msg)
-                    mView?.showLoading(false)
-                }
-
-                override fun alreadyInMeeting() {
-                    mView?.showToast("你已经在房间中了")
-                    mView?.showLoading(false)
-                }
             }
+
         )
     }
 
@@ -159,32 +172,32 @@ class HomePresenter : IHomePresenter {
             pwd = password,
             nickName = "",
             avatar = "",
-            callback = object : MeetingCallback {
-                override fun onMeetingExist(roomId: String, sessionId: String) {
-                    mView?.showTwoButtonDialog("你之前有创建的房间未结束 \n房间号：$roomId", roomId, sessionId)
-                    mView?.showLoading(false)
-                }
-
-                override fun onSuccess(data: MLRoomInfo) {
-                    Log.d(TAG, "on joinMeeting success data: $data")
-                    mView?.createAndJoinMeetingSuccess(data)
-                    mView?.showLoading(false)
-                }
-
-                override fun onError(code: Int, msg: String) {
-                    Log.d(TAG, "on joinMeeting failure $code")
-                    if (code == MAXME_REJOIN_MEETING) {
-                        mView?.showOneButtonDialog(mContext.resources.getString(R.string.ml_toast_can_not_join_meeting))
-                    } else {
-                        mView?.showToast(msg)
+            callback = object : MLCallback<MLRoomInfo> {
+                override fun onResult(code: Int, msg: String, data: MLRoomInfo?) {
+                    when(code) {
+                        0 -> {
+                            // 成功
+                            Log.d(TAG, "on joinMeeting success data: $data")
+                            mView?.createAndJoinMeetingSuccess(data!!)
+                            mView?.showLoading(false)
+                        }
+                        9997 -> {
+                            // 已经在房间中
+                            mView?.showToast("你已经在房间中了")
+                            mView?.showLoading(false)
+                        }
+                        else -> {
+                            Log.d(TAG, "on joinMeeting failure $code")
+                            if (code == MAXME_REJOIN_MEETING) {
+                                mView?.showOneButtonDialog(mContext.resources.getString(R.string.ml_toast_can_not_join_meeting))
+                            } else {
+                                mView?.showToast(msg)
+                            }
+                            mView?.showLoading(false)
+                        }
                     }
-                    mView?.showLoading(false)
                 }
 
-                override fun alreadyInMeeting() {
-                    mView?.showToast("你已经在房间中了")
-                    mView?.showLoading(false)
-                }
             }
         )
     }

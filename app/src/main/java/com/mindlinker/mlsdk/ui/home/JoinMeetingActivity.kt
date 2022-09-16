@@ -10,6 +10,7 @@ import com.mindlinker.mlsdk.ui.home.meeting.MeetingActivity
 import com.mindlinker.mlsdk.utils.NetworkUtil
 import com.mindlinker.mlsdk.utils.ShapeSelector
 import com.mindlinker.sdk.api.MLApi
+import com.mindlinker.sdk.api.callback.MLCallback
 import com.mindlinker.sdk.api.callback.MeetingCallback
 import com.mindlinker.sdk.base.BaseActivity
 import com.mindlinker.sdk.constants.JOIN_PASSWORD_ERROR
@@ -144,49 +145,48 @@ class JoinMeetingActivity : BaseActivity() {
             pwd = pwd,
             nickName = nickname,
             avatar = "",
-            callback = object : MeetingCallback {
-                override fun onMeetingExist(roomId: String, sessionId: String) {
-                    isJoining = false
-                    showToast("你之前有创建的房间未结束\n房间号：$roomId")
-                    showLoading(false)
-                }
-
-                override fun onSuccess(data: MLRoomInfo) {
-                    isJoining = false
-                    Logger.d("on joinMeeting success data: $data")
-                    createAndJoinMeetingSuccess()
-                    showLoading(false)
-                }
-
-                override fun onError(code: Int, msg: String) {
-                    isJoining = false
-                    Logger.d("on joinMeeting failure $code")
-                    runOnUiThread() {
-                        when (code) {
-                            MAXME_REJOIN_MEETING -> {
-                                showOneButtonDialog(resources.getString(R.string.ml_toast_can_not_join_meeting))
-                            }
-                            JOIN_PASSWORD_ERROR -> {
-                                if (pwd.isNotEmpty()) {
-                                    showToast(msg)
-                                }
-                                showPwdDialog()
-                            }
-                            else -> {
-                                showToast(msg)
+            callback = object : MLCallback<MLRoomInfo> {
+                override fun onResult(code: Int, msg: String, data: MLRoomInfo?) {
+                    when(code) {
+                        0 -> {
+                            // 成功
+                            isJoining = false
+                            Logger.d("on joinMeeting success data: $data")
+                            createAndJoinMeetingSuccess()
+                            showLoading(false)
+                        }
+                        9997 -> {
+                            // 已经在房间中
+                            isJoining = false
+                            runOnUiThread {
+                                showToast("你已经在房间中了")
+                                showLoading(false)
                             }
                         }
-                        showLoading(false)
+                        else -> {
+                            isJoining = false
+                            Logger.d("on joinMeeting failure $code")
+                            runOnUiThread() {
+                                when (code) {
+                                    MAXME_REJOIN_MEETING -> {
+                                        showOneButtonDialog(resources.getString(R.string.ml_toast_can_not_join_meeting))
+                                    }
+                                    JOIN_PASSWORD_ERROR -> {
+                                        if (pwd.isNotEmpty()) {
+                                            showToast(msg)
+                                        }
+                                        showPwdDialog()
+                                    }
+                                    else -> {
+                                        showToast(msg)
+                                    }
+                                }
+                                showLoading(false)
+                            }
+                        }
                     }
                 }
 
-                override fun alreadyInMeeting() {
-                    isJoining = false
-                    runOnUiThread {
-                        showToast("你已经在房间中了")
-                        showLoading(false)
-                    }
-                }
             }
         )
         audioOptionSwitchButton.setChecked(isAudioOpen)

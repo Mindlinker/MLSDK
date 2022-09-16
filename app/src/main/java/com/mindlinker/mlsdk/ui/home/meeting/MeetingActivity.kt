@@ -34,6 +34,10 @@ class MeetingActivity : BaseActivity() {
                 packageName
             )
         }
+
+        override fun moveToBack() {
+            finish()
+        }
     }
 
     private var fragment: Fragment? = null

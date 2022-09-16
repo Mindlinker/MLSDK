@@ -64,6 +64,8 @@ ext {
 //}
 
 dependencies {
+//    api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -99,7 +101,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'com.github.tbruyelle:rxpermissions:0.12'
 
-    embed (name:'sdk_1.0.3.rc2', ext:'aar')
+    embed (name:'sdk_1.0.3.efd5e5e', ext:'aar')
     embed (name:'android.logger-1.2.2', ext:'aar')
     embed (name:'MaxME_2.32.1.4cb75a06', ext:'aar')
 }
