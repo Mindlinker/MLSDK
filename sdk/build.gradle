@@ -101,7 +101,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'com.github.tbruyelle:rxpermissions:0.12'
 
-    embed (name:'sdk_1.0.4.c0b1467', ext:'aar')
+    embed (name:'sdk_1.0.4.0385ac6', ext:'aar')
     embed (name:'android.logger-1.2.2', ext:'aar')
     embed (name:'MaxME_2.32.1.4cb75a06', ext:'aar')
 }
