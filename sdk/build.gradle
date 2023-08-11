@@ -104,4 +104,6 @@ dependencies {
     embed (name:'sdk_1.0.4.0385ac6', ext:'aar')
     embed (name:'android.logger-1.2.2', ext:'aar')
     embed (name:'MaxME_2.32.1.4cb75a06', ext:'aar')
+    embed (name:'VideoLayout_1.0.1.d24b4fd', ext:'aar')
+    embed (name:'PagerIndicator_1.0.1.e0ab959', ext:'aar')
 }
